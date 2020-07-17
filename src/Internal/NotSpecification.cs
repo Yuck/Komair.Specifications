@@ -1,8 +1,8 @@
 ﻿using Komair.Specifications.Abstract;
 
-namespace Komair.Specifications
+namespace Komair.Specifications.Internal
 {
-    public class NotSpecification<T> : SpecificationBase<T>
+    internal class NotSpecification<T> : SpecificationBase<T>
     {
         private readonly ISpecification<T> _specification;
 

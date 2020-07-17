@@ -1,4 +1,6 @@
-﻿namespace Komair.Specifications.Abstract
+﻿using Komair.Specifications.Internal;
+
+namespace Komair.Specifications.Abstract
 {
     public abstract class SpecificationBase<T> : ISpecification<T>
     {
@@ -9,9 +11,9 @@
             return new AndSpecification<T>(this, specification);
         }
 
-        public ISpecification<T> Not(ISpecification<T> specification)
+        public ISpecification<T> Not()
         {
-            return new NotSpecification<T>(specification);
+            return new NotSpecification<T>(this);
         }
 
         public ISpecification<T> Or(ISpecification<T> specification)

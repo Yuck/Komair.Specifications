@@ -1,9 +1,9 @@
 ﻿using System;
 using Komair.Specifications.Abstract;
 
-namespace Komair.Specifications
+namespace Komair.Specifications.Internal
 {
-    public class AndSpecification<T> : SpecificationBase<T>
+    internal class AndSpecification<T> : SpecificationBase<T>
     {
         private readonly ISpecification<T> _left;
         private readonly ISpecification<T> _right;
