@@ -6,11 +6,13 @@ namespace Komair.Specifications
 {
     public class ExpressionSpecification<T> : SpecificationBase<T>
     {
+        private readonly Lazy<Func<T, bool>> _function;
         private readonly Expression<Func<T, bool>> _expression;
 
         public ExpressionSpecification(Expression<Func<T, bool>> expression)
         {
             _expression = expression ?? throw new ArgumentNullException(nameof(expression));
+            _function = new Lazy<Func<T, bool>>(() => _expression.Compile());
         }
 
         public ExpressionSpecification<T> And(Expression<Func<T, bool>> expression)
@@ -28,7 +30,7 @@ namespace Komair.Specifications
 
         public override bool IsSatisfiedBy(T t)
         {
-            return _expression.Compile()(t);
+            return _function.Value(t);
         }
 
         public ExpressionSpecification<T> Or(Expression<Func<T, bool>> expression)
