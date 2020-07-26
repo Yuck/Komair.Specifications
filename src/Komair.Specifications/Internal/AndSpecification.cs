@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using Komair.Specifications.Abstract;
 
 namespace Komair.Specifications.Internal
@@ -14,9 +15,17 @@ namespace Komair.Specifications.Internal
             _right = right ?? throw new ArgumentNullException(nameof(right));
         }
 
-        public override bool IsSatisfiedBy(T t)
+        public override Expression<Func<T, bool>> ToExpression()
         {
-            return _left.IsSatisfiedBy(t) && _right.IsSatisfiedBy(t);
+            var left = _left.ToExpression();
+            var right = _right.ToExpression();
+            var parameters = Expression.Parameter(typeof(T));
+            var body = new ParameterReplacer(parameters).Visit(Expression.AndAlso(left.Body, right.Body));
+            // TODO: Need unit test coverage for this condition
+            if (body == null)
+                throw new InvalidOperationException();
+
+            return new ExpressionSpecification<T>(Expression.Lambda<Func<T, bool>>(body, parameters));
         }
     }
 }

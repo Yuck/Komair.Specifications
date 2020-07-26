@@ -1,4 +1,6 @@
-﻿using Komair.Specifications.Abstract;
+﻿using System;
+using System.Linq.Expressions;
+using Komair.Specifications.Abstract;
 
 namespace Komair.Specifications.Internal
 {
@@ -11,9 +13,17 @@ namespace Komair.Specifications.Internal
             _specification = specification;
         }
 
-        public override bool IsSatisfiedBy(T t)
+        public override Expression<Func<T, bool>> ToExpression()
         {
-            return ! _specification.IsSatisfiedBy(t);
+            var expression = _specification.ToExpression();
+            var parameters = Expression.Parameter(typeof(T));
+            // TODO: This doesn't work
+            var body = Expression.Not(expression);
+            // TODO: Need unit test coverage for this condition
+            if (body == null)
+                throw new InvalidOperationException();
+
+            return new ExpressionSpecification<T>(Expression.Lambda<Func<T, bool>>(body, parameters));
         }
     }
 }
