@@ -16,9 +16,8 @@ namespace Komair.Specifications.Internal
         public override Expression<Func<T, bool>> ToExpression()
         {
             var expression = _specification.ToExpression();
-            var parameters = Expression.Parameter(typeof(T));
-            // TODO: This doesn't work
-            var body = Expression.Not(expression);
+            var parameters = expression.Parameters;
+            var body = Expression.Not(expression.Body);
             // TODO: Need unit test coverage for this condition
             if (body == null)
                 throw new InvalidOperationException();
