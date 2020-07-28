@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Komair.Specifications.csproj" />
+    <ProjectReference Include="..\..\src\Komair.Specifications\Komair.Specifications.csproj" />
   </ItemGroup>
 
 </Project>

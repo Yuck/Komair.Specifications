@@ -9,7 +9,7 @@ namespace Komair.Specifications.UnitTests.Internal
         {
             const string value = "short";
 
-            var specification = new FuncSpecification<string>(t => t.Length < 10);
+            var specification = new ShortStringSpecification();
             var result = specification.Not().IsSatisfiedBy(value);
 
             Assert.IsFalse(result);
@@ -20,7 +20,7 @@ namespace Komair.Specifications.UnitTests.Internal
         {
             const string value = "a long one";
 
-            var specification = new FuncSpecification<string>(t => t.Length < 10);
+            var specification = new ShortStringSpecification();
             var result = specification.Not().IsSatisfiedBy(value);
 
             Assert.IsTrue(result);

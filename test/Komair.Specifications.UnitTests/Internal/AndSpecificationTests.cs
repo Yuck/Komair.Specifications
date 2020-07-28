@@ -9,8 +9,8 @@ namespace Komair.Specifications.UnitTests.Internal
         {
             const string value = "short";
 
-            var left = new FuncSpecification<string>(t => t.Length < 10);
-            var right = new FuncSpecification<string>(t => t.Contains("ho"));
+            var left = new ShortStringSpecification();
+            var right = new HasOrtSpecification();
             var specification = left.And(right);
             var result = specification.IsSatisfiedBy(value);
 
@@ -22,8 +22,8 @@ namespace Komair.Specifications.UnitTests.Internal
         {
             const string value = "short";
 
-            var left = new FuncSpecification<string>(t => t.Length < 10);
-            var right = new FuncSpecification<string>(t => t.Contains("long"));
+            var left = new ShortStringSpecification();
+            var right = new HasLongSpecification();
             var specification = left.And(right);
             var result = specification.IsSatisfiedBy(value);
 
@@ -35,8 +35,8 @@ namespace Komair.Specifications.UnitTests.Internal
         {
             const string value = "a long one";
 
-            var left = new FuncSpecification<string>(t => t.Length < 10);
-            var right = new FuncSpecification<string>(t => t.Contains("long"));
+            var left = new ShortStringSpecification();
+            var right = new HasLongSpecification();
             var specification = left.And(right);
             var result = specification.IsSatisfiedBy(value);
 
