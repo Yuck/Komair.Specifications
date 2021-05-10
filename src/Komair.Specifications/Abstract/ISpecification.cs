@@ -5,11 +5,11 @@ namespace Komair.Specifications.Abstract
 {
     public interface ISpecification<T>
     {
-        bool IsSatisfiedBy(T t);
+        Boolean IsSatisfiedBy(T t);
 
         ISpecification<T> And(ISpecification<T> specification);
         ISpecification<T> Not();
         ISpecification<T> Or(ISpecification<T> specification);
-        Expression<Func<T, bool>> ToExpression();
+        Expression<Func<T, Boolean>> ToExpression();
     }
 }

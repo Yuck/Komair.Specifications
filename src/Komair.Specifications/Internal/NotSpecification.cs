@@ -14,6 +14,6 @@ namespace Komair.Specifications.Internal
             _specification = specification;
         }
 
-        public override Expression<Func<T, bool>> ToExpression() => Expression.Not(_specification.ToExpression().Body).Simplify<T>();
+        public override Expression<Func<T, Boolean>> ToExpression() => Expression.Not(_specification.ToExpression().Body).Simplify<T>();
     }
 }

@@ -12,6 +12,6 @@ namespace Komair.Specifications
 
         private FalseSpecification() { }
 
-        public override Expression<Func<T, bool>> ToExpression() => Expression.Lambda<Func<T, bool>>(TrueSpecification<T>.Identity.Not().ToExpression());
+        public override Expression<Func<T, Boolean>> ToExpression() => Expression.Lambda<Func<T, Boolean>>(TrueSpecification<T>.Identity.Not().ToExpression());
     }
 }

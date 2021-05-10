@@ -2,7 +2,6 @@
 
 namespace Komair.Specifications.Internal.ExpressionTrees
 {
-
     internal class ParameterReplacer : ExpressionVisitor
     {
         private readonly ParameterExpression _parameter;
@@ -12,9 +11,6 @@ namespace Komair.Specifications.Internal.ExpressionTrees
             _parameter = parameter;
         }
 
-        protected override Expression VisitParameter(ParameterExpression parameter)
-        {
-            return base.VisitParameter(_parameter);
-        }
+        protected override Expression VisitParameter(ParameterExpression parameter) => base.VisitParameter(_parameter);
     }
 }

@@ -12,6 +12,6 @@ namespace Komair.Specifications
 
         private TrueSpecification() { }
 
-        public override Expression<Func<T, bool>> ToExpression() => Expression.Lambda<Func<T, bool>>(Expression.Constant(true));
+        public override Expression<Func<T, Boolean>> ToExpression() => Expression.Lambda<Func<T, Boolean>>(Expression.Constant(true));
     }
 }
