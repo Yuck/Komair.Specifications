@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Komair.Specifications.Abstract;
+using Komair.Specifications.Extensions;
 
 namespace Komair.Specifications.Internal
 {
@@ -13,16 +14,6 @@ namespace Komair.Specifications.Internal
             _specification = specification;
         }
 
-        public override Expression<Func<T, bool>> ToExpression()
-        {
-            var expression = _specification.ToExpression();
-            var parameters = expression.Parameters;
-            var body = Expression.Not(expression.Body);
-            // TODO: Need unit test coverage for this condition
-            if (body == null)
-                throw new InvalidOperationException();
-
-            return new ExpressionSpecification<T>(Expression.Lambda<Func<T, bool>>(body, parameters));
-        }
+        public override Expression<Func<T, bool>> ToExpression() => Expression.Not(_specification.ToExpression().Body).Simplify<T>();
     }
 }

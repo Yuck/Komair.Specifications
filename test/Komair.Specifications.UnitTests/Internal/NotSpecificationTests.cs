@@ -1,29 +1,26 @@
-﻿using NUnit.Framework;
+﻿using Komair.Specifications.UnitTests.Abstract;
+using NUnit.Framework;
 
 namespace Komair.Specifications.UnitTests.Internal
 {
-    public class NotSpecificationTests
+    public class NotSpecificationTests : TestBase
     {
-        [Test]
-        public void ValidSpecification_WhenNegated_IsFalse()
-        {
-            const string value = "short";
-
-            var specification = new ShortStringSpecification();
-            var result = specification.Not().IsSatisfiedBy(value);
-
-            Assert.IsFalse(result);
-        }
-
         [Test]
         public void InvalidSpecification_WhenNegated_IsTrue()
         {
-            const string value = "a long one";
-
-            var specification = new ShortStringSpecification();
-            var result = specification.Not().IsSatisfiedBy(value);
+            var specification = new IsShortStringSpecification();
+            var result = specification.Not().IsSatisfiedBy(LongString);
 
             Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void ValidSpecification_WhenNegated_IsFalse()
+        {
+            var specification = new IsShortStringSpecification();
+            var result = specification.Not().IsSatisfiedBy(ShortString);
+
+            Assert.IsFalse(result);
         }
     }
 }

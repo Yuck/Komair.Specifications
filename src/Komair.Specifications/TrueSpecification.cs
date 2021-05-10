@@ -6,9 +6,12 @@ namespace Komair.Specifications
 {
     public class TrueSpecification<T> : SpecificationBase<T>
     {
-        public override Expression<Func<T, bool>> ToExpression()
-        {
-            return Expression.Lambda<Func<T, bool>>(Expression.Constant(true));
-        }
+        private static readonly Lazy<TrueSpecification<T>> IdentityInstance = new Lazy<TrueSpecification<T>>(() => new TrueSpecification<T>());
+
+        public static TrueSpecification<T> Identity => IdentityInstance.Value;
+
+        private TrueSpecification() { }
+
+        public override Expression<Func<T, bool>> ToExpression() => Expression.Lambda<Func<T, bool>>(Expression.Constant(true));
     }
 }

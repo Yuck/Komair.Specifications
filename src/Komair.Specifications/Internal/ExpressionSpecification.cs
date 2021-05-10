@@ -13,9 +13,6 @@ namespace Komair.Specifications.Internal
             _expression = expression ?? throw new ArgumentNullException(nameof(expression));
         }
 
-        public override Expression<Func<T, bool>> ToExpression()
-        {
-            return _expression;
-        }
+        public override Expression<Func<T, bool>> ToExpression() => _expression;
     }
 }

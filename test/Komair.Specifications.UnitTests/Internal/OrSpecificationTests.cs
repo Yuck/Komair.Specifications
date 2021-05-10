@@ -1,18 +1,28 @@
-﻿using NUnit.Framework;
+﻿using Komair.Specifications.UnitTests.Abstract;
+using NUnit.Framework;
 
 namespace Komair.Specifications.UnitTests.Internal
 {
-    public class OrSpecificationTests
+    public class OrSpecificationTests : TestBase
     {
         [Test]
-        public void LeftIsTrue_And_RightIsTrue_IsTrue()
+        public void LeftIsFalse_And_RightIsFalse_IsFalse()
         {
-            const string value = "short";
-
-            var left = new ShortStringSpecification();
-            var right = new HasOrtSpecification();
+            var left = new IsShortStringSpecification();
+            var right = new ContainsOrtSpecification();
             var specification = left.Or(right);
-            var result = specification.IsSatisfiedBy(value);
+            var result = specification.IsSatisfiedBy(LongString);
+
+            Assert.IsFalse(result);
+        }
+
+        [Test]
+        public void LeftIsFalse_And_RightIsTrue_IsTrue()
+        {
+            var left = new IsShortStringSpecification();
+            var right = new ContainsLongSpecification();
+            var specification = left.Or(right);
+            var result = specification.IsSatisfiedBy(LongString);
 
             Assert.IsTrue(result);
         }
@@ -20,40 +30,23 @@ namespace Komair.Specifications.UnitTests.Internal
         [Test]
         public void LeftIsTrue_And_RightIsFalse_IsTrue()
         {
-            const string value = "short";
-
-            var left = new ShortStringSpecification();
-            var right = new HasLongSpecification();
+            var left = new IsShortStringSpecification();
+            var right = new ContainsLongSpecification();
             var specification = left.Or(right);
-            var result = specification.IsSatisfiedBy(value);
+            var result = specification.IsSatisfiedBy(ShortString);
 
             Assert.IsTrue(result);
         }
 
         [Test]
-        public void LeftIsFalse_And_RightIsTrue_IsTrue()
+        public void LeftIsTrue_And_RightIsTrue_IsTrue()
         {
-            const string value = "a long one";
-
-            var left = new ShortStringSpecification();
-            var right = new HasLongSpecification();
+            var left = new IsShortStringSpecification();
+            var right = new ContainsOrtSpecification();
             var specification = left.Or(right);
-            var result = specification.IsSatisfiedBy(value);
+            var result = specification.IsSatisfiedBy(ShortString);
 
             Assert.IsTrue(result);
-        }
-
-        [Test]
-        public void LeftIsFalse_And_RightIsFalse_IsFalse()
-        {
-            const string value = "a long one";
-
-            var left = new ShortStringSpecification();
-            var right = new HasOrtSpecification();
-            var specification = left.Or(right);
-            var result = specification.IsSatisfiedBy(value);
-
-            Assert.IsFalse(result);
         }
     }
 }

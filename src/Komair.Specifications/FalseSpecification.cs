@@ -6,9 +6,12 @@ namespace Komair.Specifications
 {
     public class FalseSpecification<T> : SpecificationBase<T>
     {
-        public override Expression<Func<T, bool>> ToExpression()
-        {
-            return Expression.Lambda<Func<T, bool>>(new TrueSpecification<T>().Not().ToExpression());
-        }
+        private static readonly Lazy<FalseSpecification<T>> IdentityInstance = new Lazy<FalseSpecification<T>>(() => new FalseSpecification<T>());
+
+        public static FalseSpecification<T> Identity => IdentityInstance.Value;
+
+        private FalseSpecification() { }
+
+        public override Expression<Func<T, bool>> ToExpression() => Expression.Lambda<Func<T, bool>>(TrueSpecification<T>.Identity.Not().ToExpression());
     }
 }
