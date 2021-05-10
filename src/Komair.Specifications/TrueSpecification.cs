@@ -4,6 +4,7 @@ using Komair.Specifications.Abstract;
 
 namespace Komair.Specifications
 {
+    // TODO: Needs unit tests (be sure to use TrueSpecification<T>.Identity)
     public class TrueSpecification<T> : SpecificationBase<T>
     {
         private static readonly Lazy<TrueSpecification<T>> IdentityInstance = new Lazy<TrueSpecification<T>>(() => new TrueSpecification<T>());

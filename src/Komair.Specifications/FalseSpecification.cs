@@ -4,6 +4,7 @@ using Komair.Specifications.Abstract;
 
 namespace Komair.Specifications
 {
+    // TODO: Needs unit tests (be sure to use FalseSpecification<T>.Identity)
     public class FalseSpecification<T> : SpecificationBase<T>
     {
         private static readonly Lazy<FalseSpecification<T>> IdentityInstance = new Lazy<FalseSpecification<T>>(() => new FalseSpecification<T>());
