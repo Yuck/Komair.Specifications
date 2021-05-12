@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Komair.Specifications.UnitT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Komair.Specifications", "src\Komair.Specifications\Komair.Specifications.csproj", "{A0D708E2-D8F0-4C2B-B8A9-905DFA22A2C4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D3DDC693-D1B6-4F9D-BF12-E814AFF4AFE6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit Tests", "Unit Tests", "{185C04E2-288D-4DC7-B238-A56E5A8A0199}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +28,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E6089725-3798-4072-A63C-D880676E9CA6} = {185C04E2-288D-4DC7-B238-A56E5A8A0199}
+		{185C04E2-288D-4DC7-B238-A56E5A8A0199} = {D3DDC693-D1B6-4F9D-BF12-E814AFF4AFE6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DE6394E5-84E6-49B7-826D-F1C5A8D27FC1}

@@ -14,8 +14,6 @@ namespace Komair.Specifications.Abstract
             _predicate = new Lazy<Func<T, Boolean>>(() => ToExpression().Simplify<T>().Compile());
         }
 
-        public static implicit operator Expression<Func<T, Boolean>>(SpecificationBase<T> specification) => specification.ToExpression();
-
         public ISpecification<T> And(ISpecification<T> specification) => new AndSpecification<T>(this, specification);
 
         public Boolean IsSatisfiedBy(T t) => _predicate.Value(t);
