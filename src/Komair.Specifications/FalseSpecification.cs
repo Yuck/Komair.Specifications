@@ -2,16 +2,15 @@
 using System.Linq.Expressions;
 using Komair.Specifications.Abstract;
 
-namespace Komair.Specifications
+namespace Komair.Specifications;
+
+public class FalseSpecification<T> : SpecificationBase<T>
 {
-    public class FalseSpecification<T> : SpecificationBase<T>
-    {
-        private static readonly Lazy<FalseSpecification<T>> IdentityInstance = new Lazy<FalseSpecification<T>>(() => new FalseSpecification<T>());
+    private static readonly Lazy<FalseSpecification<T>> IdentityInstance = new(() => new FalseSpecification<T>());
 
-        public static FalseSpecification<T> Identity => IdentityInstance.Value;
+    public static FalseSpecification<T> Identity => IdentityInstance.Value;
 
-        private FalseSpecification() { }
+    private FalseSpecification() { }
 
-        public override Expression<Func<T, Boolean>> ToExpression() => TrueSpecification<T>.Identity.Not().ToExpression();
-    }
+    public override Expression<Func<T, Boolean>> ToExpression() => TrueSpecification<T>.Identity.Not().ToExpression();
 }
