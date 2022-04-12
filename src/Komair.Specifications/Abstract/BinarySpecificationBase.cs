@@ -1,6 +1,5 @@
 using System;
 using System.Linq.Expressions;
-using Komair.Specifications.Extensions;
 
 namespace Komair.Specifications.Abstract;
 
@@ -15,7 +14,7 @@ public abstract class BinarySpecificationBase<T> : SpecificationBase<T>
         Right = right ?? throw new ArgumentNullException(nameof(right));
     }
 
-    public override Expression<Func<T, Boolean>> ToExpression() => GetBinaryExpression().Simplify<T>();
+    public override Expression<Func<T, Boolean>> ToExpression() => GetLambda(GetBinaryExpression());
 
     protected abstract BinaryExpression GetBinaryExpression();
 }

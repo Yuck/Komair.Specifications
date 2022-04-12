@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Komair.Specifications.Abstract;
-using Komair.Specifications.Extensions;
 
 namespace Komair.Specifications.Internal;
 
@@ -14,5 +13,5 @@ internal class NotSpecification<T> : SpecificationBase<T>
         _specification = specification;
     }
 
-    public override Expression<Func<T, Boolean>> ToExpression() => Expression.Not(_specification.ToExpression().Body).Simplify<T>();
+    public override Expression<Func<T, Boolean>> ToExpression() => GetLambda(Expression.Not(_specification.ToExpression().Body));
 }
