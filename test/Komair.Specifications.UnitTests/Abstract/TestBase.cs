@@ -2,50 +2,49 @@ using System;
 using System.Linq.Expressions;
 using Komair.Specifications.Abstract;
 
-namespace Komair.Specifications.UnitTests.Abstract
+namespace Komair.Specifications.UnitTests.Abstract;
+
+public abstract class TestBase
 {
-    public abstract class TestBase
+    protected const String LongString = "a long one";
+    protected const String ShortString = "short";
+
+    protected class ContainsLongSpecification : SpecificationBase<String>
     {
-        protected const string LongString = "a long one";
-        protected const string ShortString = "short";
+        public override Expression<Func<String, Boolean>> ToExpression() => t => t.Contains("long");
+    }
 
-        protected class ContainsLongSpecification : SpecificationBase<string>
+    protected class ContainsOrtSpecification : SpecificationBase<String>
+    {
+        public override Expression<Func<String, Boolean>> ToExpression() => t => t.Contains("ort");
+    }
+
+    protected class EndsWithSpecification : SpecificationBase<String>
+    {
+        private readonly String _suffix;
+
+        public EndsWithSpecification(String suffix)
         {
-            public override Expression<Func<string, bool>> ToExpression() => t => t.Contains("long");
+            _suffix = suffix;
         }
 
-        protected class ContainsOrtSpecification : SpecificationBase<string>
+        public override Expression<Func<String, Boolean>> ToExpression() => t => t.EndsWith(_suffix);
+    }
+
+    protected class IsShortStringSpecification : SpecificationBase<String>
+    {
+        public override Expression<Func<String, Boolean>> ToExpression() => t => t.Length < 10;
+    }
+
+    protected class StartsWithSpecification : SpecificationBase<String>
+    {
+        private readonly String _prefix;
+
+        public StartsWithSpecification(String prefix)
         {
-            public override Expression<Func<string, bool>> ToExpression() => t => t.Contains("ort");
+            _prefix = prefix;
         }
 
-        protected class EndsWithSpecification : SpecificationBase<string>
-        {
-            private readonly string _suffix;
-
-            public EndsWithSpecification(string suffix)
-            {
-                _suffix = suffix;
-            }
-
-            public override Expression<Func<string, bool>> ToExpression() => t => t.EndsWith(_suffix);
-        }
-
-        protected class IsShortStringSpecification : SpecificationBase<string>
-        {
-            public override Expression<Func<string, bool>> ToExpression() => t => t.Length < 10;
-        }
-
-        protected class StartsWithSpecification : SpecificationBase<string>
-        {
-            private readonly string _prefix;
-
-            public StartsWithSpecification(string prefix)
-            {
-                _prefix = prefix;
-            }
-
-            public override Expression<Func<string, bool>> ToExpression() => t => t.StartsWith(_prefix);
-        }
+        public override Expression<Func<String, Boolean>> ToExpression() => t => t.StartsWith(_prefix);
     }
 }

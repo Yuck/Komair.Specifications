@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Komair.Specifications.Abstract
-{
-    public interface ISpecification<T>
-    {
-        Boolean IsSatisfiedBy(T t);
+namespace Komair.Specifications.Abstract;
 
-        ISpecification<T> And(ISpecification<T> specification);
-        ISpecification<T> Not();
-        ISpecification<T> Or(ISpecification<T> specification);
-        Expression<Func<T, Boolean>> ToExpression();
-    }
+public interface ISpecification<T>
+{
+    Boolean IsSatisfiedBy(T t);
+
+    ISpecification<T> And(ISpecification<T> specification);
+    ISpecification<T> Not();
+    ISpecification<T> Or(ISpecification<T> specification);
+    Expression<Func<T, Boolean>> ToExpression();
 }
